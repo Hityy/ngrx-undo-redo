@@ -1,6 +1,6 @@
 import { ActionReducer, Action } from '@ngrx/store';
 
-export const undoabble = (config: Config) => <T>(reducer: ActionReducer<T>) => undoReducer(reducer, config);
+export const undoRedo = (config: Config) => <T>(reducer: ActionReducer<T>) => undoReducer(reducer, config);
 export const undoReducer = <T>(reducer: ActionReducer<T>, config: Config = {}): ActionReducer<T> => {
 
     const allowedActions = config.allowedActions,
