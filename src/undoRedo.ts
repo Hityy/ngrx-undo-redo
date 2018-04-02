@@ -6,7 +6,6 @@ export const undoReducer = <T>(reducer: ActionReducer<T>, config: Config = {}): 
 
     const allowedActions = config.allowedActions,
         maxBufferSize = config.maxBufferSize || 5,
-        changesActionType = config.changesActionType || '',
         undoActionType = config.undoActionType || 'UNDO_STATE',
         redoActionType = config.redoActionType || 'REDO_STATE';
 
@@ -52,7 +51,6 @@ export const undoReducer = <T>(reducer: ActionReducer<T>, config: Config = {}): 
         if (!config.allowedActions || (allowedActions && allowedActions.some((a) => a.type === action.type))) {
 
             const nextChanged = undoState.changes + 1;
-            nextState = reducer(nextState, <Action>{ type: changesActionType, payload: nextChanged });
 
             undoState = {
                 past: [undoState.present, ...undoState.past.slice(0, maxBufferSize - 1)],
@@ -75,7 +73,6 @@ export interface UndoState<T> {
 export interface Config {
     maxBufferSize?: number;
     allowedActions?: Action[];
-    changesActionType?: string;
     undoActionType?: string;
     redoActionType?: string;
 }

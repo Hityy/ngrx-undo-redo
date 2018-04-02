@@ -53,8 +53,6 @@ interface Config {
     maxBufferSize?: number;
         // array of actions that result state can be undo, ignore others
     allowedActions?: Action[];
-        // undoRedo can throw action, to perform change count in state
-    changesActionType?: string;
         // in case of action types conflics, you can define your own undo/redo action types
     undoActionType?: string;
     redoActionType?: string;
@@ -74,7 +72,6 @@ import { undoRedo } from 'ngrx-undo-redo';
         maxBufferSize: 15,
         // undo/redo can be applyied only on ADD_ITEM/REMOVE_ITEM result state,
         allowedActions: [{ type: 'ADD_ITEM' }, { type: 'REMOVE_ITEM' }],
-        changesActionType: 'INCREMENT_CHANGES_COUNT',
         undoActionType: 'UNDO',
         redoActionType: 'REDO'
       })]
@@ -106,36 +103,6 @@ export class UnodRedoButtonsComponent {
         this.store.dispatch(<UndoActions>{ type: 'REDO' });
     }
 }
-
-```
-
-```typescript 
-const initialState = {
-    stage: [],
-    changesCount: 0,
-};
-
-function appReducer(state = initialState, action: AppActions) {
-    switch (action.type) {
-        case 'ADD_ITEM': {
-            return {
-                ...state,
-                stage: [...state.stage, action.payload]
-            }
-        };
-        case 'REMOVE_ITEM': {
-            return {
-                ...state,
-                stage: [...state.stage.slice(0, state.stage.length - 1)]
-            }
-        };
-        // action type passed to config
-        case 'INCREMENT_CHANGES_COUNT': {
-            return {
-                ...state,
-                changesCount: action.payload
-            }
-        }
 
 ```
 
