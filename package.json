@@ -2,7 +2,7 @@
   "name": "ngrx-undo-redo",
   "version": "1.0.1",
   "description": "undo-redo library for @ngrx/store",
-  "main": "undoRedo.ts",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hityy/ngrx-undo-redo.git"
@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Hityy/ngrx-undo-redo/issues"
   },
-  "homepage": "https://github.com/Hityy/ngrx-undo-redo#readme"
+  "homepage": "https://github.com/Hityy/ngrx-undo-redo#readme",
+  "peerDependencies": {
+    "@ngrx/store": "^4.0.0"
+  }
 }

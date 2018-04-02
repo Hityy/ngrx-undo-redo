@@ -1,6 +1,7 @@
 import { ActionReducer, Action } from '@ngrx/store';
 
-export const undoRedo = (config: Config) => <T>(reducer: ActionReducer<T>) => undoReducer(reducer, config);
+export type UndoActions = { type: 'UNDO_STATE' } | { type: 'REDO_STATE' };
+export const undoRedo = (config?: Config) => <T>(reducer: ActionReducer<T>) => undoReducer(reducer, config);
 export const undoReducer = <T>(reducer: ActionReducer<T>, config: Config = {}): ActionReducer<T> => {
 
     const allowedActions = config.allowedActions,
